@@ -6,6 +6,7 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     public StageUIManager stageUI;
+    public GameObject enemyPrefab;
 
     //“G‚É‘˜‹ö‚·‚éƒe[ƒuƒ‹F|1‚È‚ç‘˜‹ö‚µ‚È‚¢A0‚È‚ç‘˜‹ö
     int[] encountTable = { -1, -1, 0, -1, 0, -1 };
@@ -31,7 +32,12 @@ public class QuestManager : MonoBehaviour
         }
         else if(encountTable[currentStage] == 0)
         {
-            Debug.Log("“G‚É‘˜‹ö");
+            EncountEnemy();
         }
+    }
+
+    void EncountEnemy()
+    {
+        Instantiate(enemyPrefab);
     }
 }
