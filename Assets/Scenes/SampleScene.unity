@@ -652,6 +652,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageText: {fileID: 793302533}
+  nextButton: {fileID: 1164974342}
+  toTownButton: {fileID: 772832561}
 --- !u!1 &909509992
 GameObject:
   m_ObjectHideFlags: 0
