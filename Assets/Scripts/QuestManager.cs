@@ -24,7 +24,12 @@ public class QuestManager : MonoBehaviour
         //進行度をUIに反映
         stageUI.UpdateUI(currentStage);
 
-        if(encountTable[currentStage] == 0)
+        if(encountTable.Length <= currentStage)
+        {
+            Debug.Log("クエストクリア");
+            //クリア処理
+        }
+        else if(encountTable[currentStage] == 0)
         {
             Debug.Log("敵に遭遇");
         }
