@@ -5,20 +5,14 @@ using UnityEngine;
 //Player‚ÆEnemy‚Ì‘ÎíŠÇ—
 public class BattleManager : MonoBehaviour
 {
-    
-    public PlayerUIManager playerUI;
-    public EnemyUIManager enemyUI;
-    public PlayerManager player;
+    public PlayeManager player;
     public EnemyManager enemy;
 
     void Start()
     {
         //Player‚ªEnemy‚ÉUŒ‚
         player.Attack(enemy);
-        enemyUI.UpdateUI(enemy);
-
         //Enemy‚ªPlayer‚ÉUŒ‚
         enemy.Attack(player);
-        playerUI.UpdateUI(player);
     }
 }

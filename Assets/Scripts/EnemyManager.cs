@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     public int at;
 
     //UŒ‚‚·‚é
-    public void Attack(PlayerManager player)
+    public void Attack(PlayeManager player)
     {
         player.Damage(at);
     }

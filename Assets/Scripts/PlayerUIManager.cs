@@ -8,8 +8,8 @@ public class PlayerUIManager : MonoBehaviour
     public Text hpText;
     public Text atText;
 
-    public void UpdateUI(PlayerManager player)
+    public void UpdateUI()
     {
-        hpText.text = string.Format("HP{0}", player.hp);
+        hpText.text = string.Format("HP{0}", 80);
     }
 }
