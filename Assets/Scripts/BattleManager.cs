@@ -8,18 +8,17 @@ public class BattleManager : MonoBehaviour
     public PlayerUIManager playerUI;
     public EnemyUIManager enemyUI;
     public PlayerManager player;
-    public EnemyManager enemy;
-    void Start()
+    EnemyManager enemy;
+    
+    //‰Šúİ’è
+    public void SetUp(EnemyManager enemyManager)
     {
-        SetUp();
-    }
-
-    void SetUp()
-    {
+        enemy = enemyManager;
         enemyUI.SetupUI(enemy);
         playerUI.SetupUI(player);
+
+        enemy.AddEventListenerOnTap(PlayerAttack);
     }
-    //‰Šúİ’è
 
     void PlayerAttack()
     {
