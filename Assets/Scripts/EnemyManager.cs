@@ -22,7 +22,10 @@ public class EnemyManager : MonoBehaviour
     public void Damage(int damage)
     {
         hp -= damage;
-        Debug.Log("Playre‚ÌHP‚Í" + hp);
+        if (hp <= 0)
+        {
+            hp = 0;
+        }
     }
 
     //tapAction‚ÉŠÖ”‚ð“o˜^‚·‚éŠÖ”‚ðì‚é
