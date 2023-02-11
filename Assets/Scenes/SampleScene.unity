@@ -1354,7 +1354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e626f8ce18bde474785d309abbe5e026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: monster
+  name: "\u30C6\u30B9\u30C8"
   hp: 10
   at: 2
 --- !u!4 &1361227993
