@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class StageUIManager : MonoBehaviour
 {
     public Text stageText;
-    public GameObject stageClearText;
+    public GameObject stageClearImage;
     public GameObject nextButton;
     public GameObject toTownButton;
 
     private void Start()
     {
-        stageClearText.SetActive(false);
+        stageClearImage.SetActive(false);
     }
     public void UpdateUI(int currentStage)
     {
@@ -34,7 +34,7 @@ public class StageUIManager : MonoBehaviour
 
     public void ShowClearText()
     {
-        stageClearText.SetActive(true);
+        stageClearImage.SetActive(true);
         nextButton.SetActive(false);
         toTownButton.SetActive(true);
     }
