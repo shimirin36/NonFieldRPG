@@ -23,6 +23,7 @@ public class QuestManager : MonoBehaviour
     //Nextボタンが押されたら
     public void OnNextButton()
     {
+        SoundManager.instance.PlaySE(0);
         currentStage++;
         //進行度をUIに反映
         stageUI.UpdateUI(currentStage);
@@ -36,6 +37,12 @@ public class QuestManager : MonoBehaviour
         {
             EncountEnemy();
         }
+    }
+
+    //街に戻るボタンを押されたら
+    public void OnTapTownButtton()
+    {
+        SoundManager.instance.PlaySE(0);
     }
 
     public void EncountEnemy()
@@ -53,8 +60,10 @@ public class QuestManager : MonoBehaviour
 
     void QuestClear()
     {
-        //クエストクリアと表示する
-        stageUI.ShowClearText();
+        //クエストクリア音を鳴らす
+        SoundManager.instance.StopBGM();
+        SoundManager.instance.PlaySE(2);
         //街に戻るボタンのみ表示する
+        stageUI.ShowClearText();
     }
 }
