@@ -154,3 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e626f8ce18bde474785d309abbe5e026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Dorge
+  hp: 200
+  at: 23
