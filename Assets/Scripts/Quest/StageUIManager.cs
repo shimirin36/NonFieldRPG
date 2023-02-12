@@ -7,9 +7,14 @@ using UnityEngine.UI;
 public class StageUIManager : MonoBehaviour
 {
     public Text stageText;
+    public GameObject stageClearText;
     public GameObject nextButton;
     public GameObject toTownButton;
 
+    private void Start()
+    {
+        stageClearText.SetActive(false);
+    }
     public void UpdateUI(int currentStage)
     {
         stageText.text = string.Format("ステージ：{0}", currentStage + 1);
@@ -24,6 +29,13 @@ public class StageUIManager : MonoBehaviour
     public void ShowButtons()
     {
         nextButton.SetActive(true);
+        toTownButton.SetActive(true);
+    }
+
+    public void ShowClearText()
+    {
+        stageClearText.SetActive(true);
+        nextButton.SetActive(false);
         toTownButton.SetActive(true);
     }
 }

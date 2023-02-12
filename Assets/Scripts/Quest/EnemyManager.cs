@@ -36,7 +36,6 @@ public class EnemyManager : MonoBehaviour
 
     public void OnTap()
     {
-        Debug.Log("ƒNƒŠƒbƒN‚³‚ê‚½");
         tapAction();
     }
 

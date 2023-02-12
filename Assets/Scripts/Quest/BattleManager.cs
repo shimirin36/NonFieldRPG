@@ -5,14 +5,21 @@ using UnityEngine;
 //Player‚ÆEnemy‚Ì‘ÎíŠÇ—
 public class BattleManager : MonoBehaviour
 {
+    public QuestManager questManager;
     public PlayerUIManager playerUI;
     public EnemyUIManager enemyUI;
     public PlayerManager player;
     EnemyManager enemy;
-    
+
+    private void Start()
+    {
+        enemyUI.gameObject.SetActive(false);
+    }
+
     //‰Šúİ’è
     public void SetUp(EnemyManager enemyManager)
     {
+        enemyUI.gameObject.SetActive(true);
         enemy = enemyManager;
         enemyUI.SetupUI(enemy);
         playerUI.SetupUI(player);
@@ -26,6 +33,7 @@ public class BattleManager : MonoBehaviour
         enemyUI.UpdateUI(enemy);
         if(enemy.hp <= 0)
         {
+            enemyUI.gameObject.SetActive(false);
             Destroy(enemy.gameObject);
             EndBattle();
         }
@@ -43,7 +51,7 @@ public class BattleManager : MonoBehaviour
 
     void EndBattle()
     {
-        Debug.Log("EndBattleII");
+        questManager.EndBattle();
     }
 
 }
