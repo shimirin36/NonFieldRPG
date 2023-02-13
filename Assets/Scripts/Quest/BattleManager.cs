@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 //Player‚ÆEnemy‚Ì‘ÎíŠÇ—
 public class BattleManager : MonoBehaviour
 {
+    public Transform playerDamageEffect;
     public QuestManager questManager;
     public PlayerUIManager playerUI;
     public EnemyUIManager enemyUI;
@@ -36,9 +38,7 @@ public class BattleManager : MonoBehaviour
         enemyUI.UpdateUI(enemy);
         if(enemy.hp <= 0)
         {
-            enemyUI.gameObject.SetActive(false);
-            Destroy(enemy.gameObject);
-            EndBattle();
+            StartCoroutine(EndBattle());
         }
         else
         {
@@ -50,12 +50,16 @@ public class BattleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         SoundManager.instance.PlaySE(1);
+        playerDamageEffect.DOShakePosition(0.3f, 0.5f, 10, 20);
         enemy.Attack(player);
         playerUI.UpdateUI(player);
     }
 
-    void EndBattle()
+    IEnumerator EndBattle()
     {
+        yield return new WaitForSeconds(1f);
+        enemyUI.gameObject.SetActive(false);
+        Destroy(enemy.gameObject);
         SoundManager.instance.PlayBGM("Quest");
         questManager.EndBattle();
     }

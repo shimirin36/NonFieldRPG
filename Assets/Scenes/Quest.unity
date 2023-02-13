@@ -1829,6 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffbee0ee384a8d45913f86ca6b38d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDamageEffect: {fileID: 519420032}
   questManager: {fileID: 794778804}
   playerUI: {fileID: 493561851}
   enemyUI: {fileID: 740860547}
