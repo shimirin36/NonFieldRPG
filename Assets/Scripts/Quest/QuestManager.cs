@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 //クエスト全体を管理する
 public class QuestManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class QuestManager : MonoBehaviour
     public GameObject enemyPrefab;
     public BattleManager battleManager;
     public SceneTransitionManager sceneTransitionManager;
+    public GameObject questBG;
 
     //敵に遭遇するテーブル：－1なら遭遇しない、0なら遭遇
     int[] encountTable = { -1, -1, 0, -1, 0, -1 };
@@ -24,19 +26,42 @@ public class QuestManager : MonoBehaviour
     public void OnNextButton()
     {
         SoundManager.instance.PlaySE(0);
+        stageUI.HideButtons();
+        StartCoroutine(Searching());
+    }
+
+    IEnumerator Searching()
+    {
+        //背景を進んでいるように見せる
+        questBG.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 2f).OnComplete(() => questBG.transform.localScale = new Vector3(1, 1, 1));
+
+        //進んだ背景をフェードアウトさせる
+        SpriteRenderer questBGSpriteRenderer = questBG.GetComponent<SpriteRenderer>();
+        questBGSpriteRenderer.DOFade(0f, 2f).OnComplete(() => questBGSpriteRenderer.DOFade(1f, 0f));
+
+        //処理を待機させる
+        yield return new WaitForSeconds(2f);
+
+        //ステージ進行度を1進める
         currentStage++;
-        //進行度をUIに反映
+
+        //ステージ進行度をUIに反映
         stageUI.UpdateUI(currentStage);
 
-        if(encountTable.Length <= currentStage)
+        if (encountTable.Length <= currentStage)
         {
             QuestClear();
         }
-        else if(encountTable[currentStage] == 0)
+        else if (encountTable[currentStage] == 0)
         {
             EncountEnemy();
         }
+        else
+        {
+            stageUI.ShowButtons();
+        }
     }
+
 
     //街に戻るボタンを押されたら
     public void OnTapTownButtton()

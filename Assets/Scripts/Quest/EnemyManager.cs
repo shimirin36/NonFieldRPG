@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour
     public new string name;
     public int hp;
     public int at;
+    public GameObject hitEffect;
 
     //UŒ‚‚·‚é
     public void Attack(PlayerManager player)
@@ -23,6 +24,7 @@ public class EnemyManager : MonoBehaviour
     //ƒ_ƒ[ƒW‚ğó‚¯‚é
     public void Damage(int damage)
     {
+        Instantiate(hitEffect, this.transform, false);
         transform.DOShakePosition(0.3f, 0.5f, 20, 30, false, true);
         hp -= damage;
         if (hp <= 0)
