@@ -439,7 +439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.4442247}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0038986, y: -45}
+  m_AnchoredPosition: {x: -0.0038986, y: -38.307}
   m_SizeDelta: {x: 443.35, y: 76.6134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &184302669
@@ -1721,8 +1721,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d0f511eb580ac4b9de672efb559583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 20
-  at: 50
+  maxHP: 100
+  hp: 100
+  at: 35
 --- !u!4 &1359615450
 Transform:
   m_ObjectHideFlags: 0
@@ -1882,7 +1883,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 110
+    m_MaxSize: 65
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1932,6 +1933,7 @@ MonoBehaviour:
   playerUI: {fileID: 493561851}
   enemyUI: {fileID: 740860547}
   player: {fileID: 1359615449}
+  canAttack: 1
 --- !u!4 &1600172463
 Transform:
   m_ObjectHideFlags: 0

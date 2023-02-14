@@ -81,9 +81,16 @@ public class QuestManager : MonoBehaviour
         battleManager.SetUp(enemy);
     }
 
+    //バトル終了処理
     public void EndBattle()
     {
         stageUI.ShowButtons();
+    }
+
+    //プレイヤー戦闘不能処理
+    public void QuestFail()
+    {
+        sceneTransitionManager.LoadTo("Town");
     }
 
     void QuestClear()

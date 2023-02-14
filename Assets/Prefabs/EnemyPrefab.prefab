@@ -156,5 +156,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Dorge
   hp: 200
-  at: 23
+  at: 100
   hitEffect: {fileID: 4551888306793104505, guid: 535aa2577a34f434d910398b5317aa07, type: 3}

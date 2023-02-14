@@ -16,13 +16,14 @@ public class EnemyManager : MonoBehaviour
     public GameObject hitEffect;
 
     //UŒ‚‚·‚é
-    public void Attack(PlayerManager player)
+    public int Attack(PlayerManager player)
     {
-        player.Damage(at);
+        int damage = player.Damage(at);
+        return damage;
     }
 
     //ƒ_ƒ[ƒW‚ğó‚¯‚é
-    public void Damage(int damage)
+    public int Damage(int damage)
     {
         Instantiate(hitEffect, this.transform, false);
         transform.DOShakePosition(0.3f, 0.5f, 20, 30, false, true);
@@ -31,6 +32,7 @@ public class EnemyManager : MonoBehaviour
         {
             hp = 0;
         }
+        return damage;
     }
 
     public void AddEventListenerOnTap(Action action)
