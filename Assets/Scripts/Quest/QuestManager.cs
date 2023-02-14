@@ -20,6 +20,7 @@ public class QuestManager : MonoBehaviour
     private void Start()
     {
         stageUI.UpdateUI(currentStage);
+        DialogTextManager.instance.SetScenarios(new string[] { "ダンジョンについた。" });
     }
 
     //Nextボタンが押されたら
@@ -32,6 +33,8 @@ public class QuestManager : MonoBehaviour
 
     IEnumerator Searching()
     {
+        DialogTextManager.instance.SetScenarios(new string[] { "探索中・・・" });
+
         //背景を進んでいるように見せる
         questBG.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 2f).OnComplete(() => questBG.transform.localScale = new Vector3(1, 1, 1));
 
@@ -71,6 +74,7 @@ public class QuestManager : MonoBehaviour
 
     public void EncountEnemy()
     {
+        DialogTextManager.instance.SetScenarios(new string[] { "モンスターに遭遇した！！" });
         stageUI.HideButtons();
         GameObject enemyObj = Instantiate(enemyPrefab);
         EnemyManager enemy = enemyObj.GetComponent<EnemyManager>();
@@ -84,6 +88,7 @@ public class QuestManager : MonoBehaviour
 
     void QuestClear()
     {
+        DialogTextManager.instance.SetScenarios(new string[] { "宝箱を手に入れた！！", "街に戻ろう。" });
         //クエストクリア音を鳴らす
         SoundManager.instance.StopBGM();
         SoundManager.instance.PlaySE(2);

@@ -33,6 +33,7 @@ public class BattleManager : MonoBehaviour
     void PlayerAttack()
     {
         StopAllCoroutines();
+        DialogTextManager.instance.SetScenarios(new string[] { "Playerの攻撃！！" });
         SoundManager.instance.PlaySE(1);
         player.Attack(enemy);
         enemyUI.UpdateUI(enemy);
@@ -49,6 +50,7 @@ public class BattleManager : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(1f);
+        DialogTextManager.instance.SetScenarios(new string[] { "モンスターの攻撃！！" });
         SoundManager.instance.PlaySE(1);
         playerDamageEffect.DOShakePosition(0.3f, 0.5f, 10, 20);
         enemy.Attack(player);
