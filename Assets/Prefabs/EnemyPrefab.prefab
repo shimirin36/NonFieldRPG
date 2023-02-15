@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e626f8ce18bde474785d309abbe5e026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Dorge
+  name: "\u30AA\u30CE\u30AA\u30E4\u30B8"
   hp: 200
   at: 100
   hitEffect: {fileID: 4551888306793104505, guid: 535aa2577a34f434d910398b5317aa07, type: 3}

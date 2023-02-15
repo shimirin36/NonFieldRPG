@@ -14,17 +14,12 @@ public class TownManager : MonoBehaviour
     {
         SoundManager.instance.PlaySE(0);
     }
-
+    //タイトルボタンが押されたら
     public void OnTapTitleButton()
     {
         SoundManager.instance.PlaySE(0);
     }
-
-    public void OnTapSaveButton()
-    {
-        SoundManager.instance.PlaySE(0);
-    }
-
+    //データ削除ボタンが押されたら
     public void OnTapDeleteSaveDataButton()
     {
         SoundManager.instance.PlaySE(0);

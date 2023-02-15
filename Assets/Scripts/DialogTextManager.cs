@@ -3,17 +3,19 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class DialogTextManager : MonoBehaviour
 {
-    //“o˜^ŠÖ”‚Ì‘‹Œûiƒ{ƒ^ƒ“‚ÌOnClick‚Æ“¯‚¶d‘g‚İj
+    //ï¿½oï¿½^ï¿½Öï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ï¿½iï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½OnClickï¿½Æ“ï¿½ï¿½ï¿½ï¿½dï¿½gï¿½İj
     [SerializeField] private UnityEvent onCompletedEvents = new UnityEngine.Events.UnityEvent();
-    //ƒeƒLƒXƒg‘—‚èI—¹Œã‚©‚çŠÖ”‚ğÀs‚·‚é‚Ü‚Å‚ÌŠÔ
+    //ï¿½eï¿½Lï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ã‚©ï¿½ï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½Ü‚Å‚Ìï¿½ï¿½ï¿½
     [SerializeField] float eventDelayTime;
-    //I—¹‚µ‚½‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO(‚±‚ê‚ª‚È‚¢‚ÆI—¹ŒãŒJ‚è•Ô‚µŠÖ”‚ğÀs‚µ‚Ä‚µ‚Ü‚¤)
+    //ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½O(ï¿½ï¿½ï¿½ê‚ªï¿½È‚ï¿½ï¿½ÆIï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½Ô‚ï¿½ï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½)
     bool isEnd;
 
     public UnityAction onClickText;
+    public SceneTransitionManager nextScene;
     public string[] scenarios;
     [SerializeField] Text uiText;
     [SerializeField]
@@ -41,7 +43,7 @@ public class DialogTextManager : MonoBehaviour
         }
     }
 
-    // •¶š‚Ì•\¦‚ªŠ®—¹‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ì•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½
     public bool IsCompleteDisplayText
     {
         get { return Time.time > timeElapsed + timeUntilDisplay; }
@@ -49,7 +51,7 @@ public class DialogTextManager : MonoBehaviour
 
     void Update()
     {
-        // •¶š‚Ì•\¦‚ªŠ®—¹‚µ‚Ä‚é‚È‚çƒNƒŠƒbƒN‚ÉŸ‚Ìs‚ğ•\¦‚·‚é
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ì•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½È‚ï¿½Nï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½Éï¿½ï¿½Ìsï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (IsCompleteDisplayText)
         {
             if (currentLine < scenarios.Length && Input.GetMouseButtonDown(0))
@@ -59,7 +61,7 @@ public class DialogTextManager : MonoBehaviour
         }
         else
         {
-            // Š®—¹‚µ‚Ä‚È‚¢‚È‚ç•¶š‚ğ‚·‚×‚Ä•\¦‚·‚é
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚È‚ï¿½ï¿½È‚ç•¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×‚Ä•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (Input.GetMouseButtonDown(0))
             {
                 timeUntilDisplay = 0;
@@ -75,17 +77,17 @@ public class DialogTextManager : MonoBehaviour
         CheckCompletedText();
     }
 
-    //I—¹‚µ‚½‚©’²‚×‚ÄI—¹‚µ‚Ä‚¢‚ê‚Î“o˜^ŠÖ”‚ğÀ‘•‚·‚é
+    //ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×‚ÄIï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Î“oï¿½^ï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void CheckCompletedText()
     {
         if (isEnd == false && IsCompleteDisplayText && scenarios.Length == currentLine)
         {
             isEnd = true;
-            // “o˜^ŠÖ”‚ğeventDelayTime•bŒã‚ÉÀs
+            // ï¿½oï¿½^ï¿½Öï¿½ï¿½ï¿½eventDelayTimeï¿½bï¿½ï¿½Éï¿½ï¿½s
             Invoke("EventFunction", eventDelayTime);
         }
     }
-    //“o˜^ŠÖ”‚ÌÀs
+    //ï¿½oï¿½^ï¿½Öï¿½ï¿½Ìï¿½ï¿½s
     void EventFunction()
     {
         onCompletedEvents.Invoke();
@@ -105,11 +107,13 @@ public class DialogTextManager : MonoBehaviour
         currentLine++;
         lastUpdateCharacter = -1;
     }
-    //g‚¤•”•ª
+    //ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public CanvasGroup canvasGroup;
+    
     public void SetScenarios(string[] sc)
     {
-        scenarios = sc;
-        currentLine = 0;
-        SetNextLine();
+            scenarios = sc;
+            currentLine = 0;
+            SetNextLine();
     }
 }

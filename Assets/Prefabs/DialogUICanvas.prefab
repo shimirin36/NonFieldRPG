@@ -278,3 +278,4 @@ MonoBehaviour:
   scenarios: []
   uiText: {fileID: 8138129832979089002}
   intervalForCharacterDisplay: 0.05
+  canvasGroup: {fileID: 0}

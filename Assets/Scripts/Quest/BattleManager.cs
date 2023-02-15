@@ -59,12 +59,11 @@ public class BattleManager : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(2f);
-        DialogTextManager.instance.SetScenarios(new string[] { "モンスターの攻撃！！" });
         SoundManager.instance.PlaySE(1);
         playerDamageEffect.DOShakePosition(0.3f, 0.5f, 10, 20);
         int damage = enemy.Attack(player);
         DialogTextManager.instance.SetScenarios(new string[] {
-            "モンスターの攻撃！！\nプレイヤーは"+ damage +"のダメージを受けた！！"});
+            enemy.name + "の攻撃！！\nプレイヤーは"+ damage +"のダメージを受けた！！"});
         playerUI.UpdateUI(player);
         if (player.hp <= 0)
         {

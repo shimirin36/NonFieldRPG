@@ -17,6 +17,8 @@ public class PlayerManager : MonoBehaviour
     public int hp;
     public int at;
     public int currentStage;
+    public int money;
+    public int[] items;
 
     //UŒ‚‚·‚é
     public int Attack(EnemyManager enemy)

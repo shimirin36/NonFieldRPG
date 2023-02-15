@@ -74,7 +74,7 @@ public class QuestManager : MonoBehaviour
 
     public void EncountEnemy()
     {
-        DialogTextManager.instance.SetScenarios(new string[] { "モンスターに遭遇した！！" });
+        DialogTextManager.instance.SetScenarios(new string[] {"モンスターに遭遇した！！" });
         stageUI.HideButtons();
         GameObject enemyObj = Instantiate(enemyPrefab);
         EnemyManager enemy = enemyObj.GetComponent<EnemyManager>();
