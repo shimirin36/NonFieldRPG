@@ -72,6 +72,19 @@ public class QuestManager : MonoBehaviour
         SoundManager.instance.PlaySE(0);
     }
 
+    //アイテム使うボタンを押したら
+    public void OnTapItemUseButton()
+    {
+        SoundManager.instance.PlaySE(0);
+        stageUI.HideButtons();
+        stageUI.ShowItemList();
+    }
+    public void OnTapCloseItemListButton()
+    {
+        SoundManager.instance.PlaySE(0);
+        stageUI.CloseItemList();
+    }
+
     public void EncountEnemy()
     {
         DialogTextManager.instance.SetScenarios(new string[] {"モンスターに遭遇した！！" });
