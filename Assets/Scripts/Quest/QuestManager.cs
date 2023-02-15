@@ -76,9 +76,10 @@ public class QuestManager : MonoBehaviour
     public void OnTapItemUseButton()
     {
         SoundManager.instance.PlaySE(0);
-        stageUI.HideButtons();
         stageUI.ShowItemList();
     }
+    
+    //ƒAƒCƒeƒ€ˆê——Á‚µ‚½‚ç
     public void OnTapCloseItemListButton()
     {
         SoundManager.instance.PlaySE(0);
