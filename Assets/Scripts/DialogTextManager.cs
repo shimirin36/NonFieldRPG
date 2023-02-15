@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class DialogTextManager : MonoBehaviour
 {
-    //�o�^�֐��̑����i�{�^����OnClick�Ɠ����d�g�݁j
+    //登録関数の窓口作成（ボタンのOnClickと同じ仕組み）
     [SerializeField] private UnityEvent onCompletedEvents = new UnityEngine.Events.UnityEvent();
-    //�e�L�X�g����I���ォ��֐������s����܂ł̎���
+    //テキスト送り終了後から関数を実行するまでの時間
     [SerializeField] float eventDelayTime;
-    //�I���������ǂ����̃t���O(���ꂪ�Ȃ��ƏI����J��Ԃ��֐������s���Ă��܂�)
+    //終了したかどうかのフラグ
     bool isEnd;
 
     public UnityAction onClickText;
@@ -43,7 +43,7 @@ public class DialogTextManager : MonoBehaviour
         }
     }
 
-    // �����̕\�����������Ă��邩�ǂ���
+    // 文字の表示が完了しているかどうか
     public bool IsCompleteDisplayText
     {
         get { return Time.time > timeElapsed + timeUntilDisplay; }
@@ -51,7 +51,7 @@ public class DialogTextManager : MonoBehaviour
 
     void Update()
     {
-        // �����̕\�����������Ă�Ȃ�N���b�N���Ɏ��̍s��\������
+        // 文字の表示が完了してるならクリック時に次の行を表示する
         if (IsCompleteDisplayText)
         {
             if (currentLine < scenarios.Length && Input.GetMouseButtonDown(0))
@@ -61,7 +61,7 @@ public class DialogTextManager : MonoBehaviour
         }
         else
         {
-            // �������ĂȂ��Ȃ當�������ׂĕ\������
+            // 完了してないなら文字をすべて表示する
             if (Input.GetMouseButtonDown(0))
             {
                 timeUntilDisplay = 0;
@@ -77,17 +77,17 @@ public class DialogTextManager : MonoBehaviour
         CheckCompletedText();
     }
 
-    //�I�����������ׂďI�����Ă���Γo�^�֐�����������
+    //終了したか調べて終了していれば登録関数を実装する
     void CheckCompletedText()
     {
         if (isEnd == false && IsCompleteDisplayText && scenarios.Length == currentLine)
         {
             isEnd = true;
-            // �o�^�֐���eventDelayTime�b��Ɏ��s
+            // 登録関数をeventDelayTime秒後に実行
             Invoke("EventFunction", eventDelayTime);
         }
     }
-    //�o�^�֐��̎��s
+    //登録関数の実行
     void EventFunction()
     {
         onCompletedEvents.Invoke();
@@ -107,9 +107,7 @@ public class DialogTextManager : MonoBehaviour
         currentLine++;
         lastUpdateCharacter = -1;
     }
-    //�g������
-    public CanvasGroup canvasGroup;
-    
+    //基本的に使うのはこれだけ
     public void SetScenarios(string[] sc)
     {
             scenarios = sc;
