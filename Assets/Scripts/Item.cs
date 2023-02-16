@@ -16,14 +16,30 @@ public class Item : ScriptableObject
         ToTownBall
     }
 
-    public int count; // ŒÂ”
-    public string infomation; // î•ñ
-    public Sprite sprite; // ‰æ‘œ
+    [SerializeField] public int count; // ŒÂ”
+    [SerializeField] public string infomation; // î•ñ
+    [SerializeField] public Sprite sprite; // ‰æ‘œ
 
     public Item(Item item)
     {
         this.count = item.count;
         this.infomation = item.infomation;
         this.sprite = item.sprite; 
+    }
+    public int Count
+    {
+        get { return count; }
+        set { count = value; }
+        
+    }
+    public string Infomation
+    {
+        get { return infomation; }
+        set { infomation = value; }
+    }
+    public Sprite Sprite
+    {
+        get { return sprite; }
+        set { sprite = value; }
     }
 }

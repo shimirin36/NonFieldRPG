@@ -11,9 +11,11 @@ public class QuestManager : MonoBehaviour
     public BattleManager battleManager;
     public SceneTransitionManager sceneTransitionManager;
     public GameObject questBG;
+    public MonsterDataBase monsterDB;
 
     //敵に遭遇するテーブル：－1なら遭遇しない、0なら遭遇
-    int[] encountTable = { -1, -1, 0, -1, 0, -1 };
+    //ダンジョン上限数
+    int[] encountTable = new int [10];
 
     int currentStage = 0; //現在のステージ進行度
 
@@ -21,6 +23,12 @@ public class QuestManager : MonoBehaviour
     {
         stageUI.UpdateUI(currentStage);
         DialogTextManager.instance.SetScenarios(new string[] { "ダンジョンについた。" });
+        //乱数をエンカウントテーブルに設定
+        for (int i = 0; i < 10; i++)
+        {
+            int rnd = Random.Range(1, 101);
+            encountTable[i] = rnd;
+        }
     }
 
     //Nextボタンが押されたら
@@ -28,6 +36,7 @@ public class QuestManager : MonoBehaviour
     {
         SoundManager.instance.PlaySE(0);
         stageUI.HideButtons();
+        stageUI.CanNotTapItemButton();
         StartCoroutine(Searching());
     }
 
@@ -55,13 +64,15 @@ public class QuestManager : MonoBehaviour
         {
             QuestClear();
         }
-        else if (encountTable[currentStage] == 0)
+        else if (encountTable[currentStage] % 2 == 0)
         {
+            Debug.Log(encountTable[currentStage]);
             EncountEnemy();
         }
         else
         {
             stageUI.ShowButtons();
+            stageUI.CanTapItemButton();
         }
     }
 
@@ -86,13 +97,26 @@ public class QuestManager : MonoBehaviour
         stageUI.CloseItemList();
     }
 
+    //選んだアイテムを使うボタン押したら
+    public void OnTapUseButtom()
+    {
+        SoundManager.instance.PlaySE(0);
+    }
+
     public void EncountEnemy()
     {
         DialogTextManager.instance.SetScenarios(new string[] {"モンスターに遭遇した！！" });
         stageUI.HideButtons();
-        GameObject enemyObj = Instantiate(enemyPrefab);
-        EnemyManager enemy = enemyObj.GetComponent<EnemyManager>();
-        battleManager.SetUp(enemy);
+        stageUI.CanTapItemButton();
+        if(currentStage < 10)
+        {
+            int rnd = Random.Range(0, 4);
+            GameObject enemyObj = Instantiate(monsterDB.monsters[rnd].monsterPrefab);
+            EnemyManager enemy = enemyObj.GetComponent<EnemyManager>();
+            battleManager.SetUp(enemy);
+        }
+
+        
     }
 
     //バトル終了処理

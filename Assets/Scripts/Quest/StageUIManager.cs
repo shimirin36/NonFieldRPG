@@ -11,7 +11,7 @@ public class StageUIManager : MonoBehaviour
     public GameObject stageClearImage;
     public GameObject nextButton;
     public GameObject toTownButton;
-    public GameObject useItemButton;
+    public Button useItemButton;
     public GameObject closeItemListButton;
 
     private void Start()
@@ -35,7 +35,17 @@ public class StageUIManager : MonoBehaviour
     {
         nextButton.SetActive(true);
         toTownButton.SetActive(true);
-        useItemButton.SetActive(true);
+    }
+
+    public void CanTapItemButton()
+    {
+        useItemButton.interactable = true;
+    }
+
+    public void CanNotTapItemButton()
+    {
+
+        useItemButton.interactable = false;
     }
 
     public void ShowItemList()

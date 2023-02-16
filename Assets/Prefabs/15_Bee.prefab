@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9121443136539825010}
   - component: {fileID: 8542998343818396540}
   m_Layer: 0
-  m_Name: EnemyPrefab
+  m_Name: 15_Bee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: c05755baf82318840938032a382b8bfc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ba725d29d5acae34491f20ef798aad04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +104,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.98, y: 1.84}
+    oldSize: {x: 2.5, y: 2.08}
     newSize: {x: 1.98, y: 1.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e626f8ce18bde474785d309abbe5e026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\u30AA\u30CE\u30AA\u30E4\u30B8"
-  hp: 200
-  at: 100
+  name: "\u30CB\u30FC\u30C9\u30EB\u30D3\u30FC"
+  hp: 80
+  at: 15
   hitEffect: {fileID: 4551888306793104505, guid: 535aa2577a34f434d910398b5317aa07, type: 3}

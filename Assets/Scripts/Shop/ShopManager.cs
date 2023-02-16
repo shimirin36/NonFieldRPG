@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class ShopManager : MonoBehaviour
     public ShopUIManager shopUI;
 
 
+    [SerializeField] 
     public ItemDataBase itemDB;
 
     private void Start()
@@ -42,7 +44,8 @@ public class ShopManager : MonoBehaviour
         if (player.money >= money)
         {
             player.money -= money;
-            itemDB.items[0].count++; 
+            itemDB.items[0].count++;
+            SaveInventryChange(itemDB.items[0]);
             shopUI.UpdateUI(player);
         }
         else
@@ -58,6 +61,7 @@ public class ShopManager : MonoBehaviour
         {
             player.money -= money;
             itemDB.items[1].count++;
+            SaveInventryChange(itemDB.items[1]);
             shopUI.UpdateUI(player);
         }
         else
@@ -73,6 +77,7 @@ public class ShopManager : MonoBehaviour
         {
             player.money -= money;
             itemDB.items[2].count++;
+            SaveInventryChange(itemDB.items[2]);
             shopUI.UpdateUI(player);
         }
         else
@@ -88,6 +93,7 @@ public class ShopManager : MonoBehaviour
         {
             player.money -= money;
             itemDB.items[3].count++;
+            SaveInventryChange(itemDB.items[3]);
             shopUI.UpdateUI(player);
         }
         else
@@ -103,6 +109,7 @@ public class ShopManager : MonoBehaviour
         {
             player.money -= money;
             itemDB.items[4].count++;
+            SaveInventryChange(itemDB.items[4]);
             shopUI.UpdateUI(player);
         }
         else
@@ -118,6 +125,7 @@ public class ShopManager : MonoBehaviour
         {
             player.money -= money;
             itemDB.items[5].count++;
+            SaveInventryChange(itemDB.items[5]);
             shopUI.UpdateUI(player);
         }
         else if (itemDB.items[5].count == 1)
@@ -133,5 +141,11 @@ public class ShopManager : MonoBehaviour
     void NoMoney()
     {
         DialogTextManager.instance.SetScenarios(new string[] { "Ç®ã‡Ç™ë´ÇËÇ»Ç¢ÅIÅI" });
+    }
+
+    void SaveInventryChange(Item itemCount)
+    {
+        EditorUtility.SetDirty(itemCount);
+        AssetDatabase.SaveAssets();
     }
 }
