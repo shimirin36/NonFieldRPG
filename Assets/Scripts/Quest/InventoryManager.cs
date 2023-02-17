@@ -168,12 +168,14 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    //•ÏX“à—e‚ğ•Û‘¶‚·‚é
     void SaveInventryChange(Item itemCount)
     {
         EditorUtility.SetDirty(itemCount);
         AssetDatabase.SaveAssets();
     }
 
+    //ŠX‚É–ß‚é
     IEnumerator returnToTown()
     {
         yield return new WaitForSeconds(3f);

@@ -12,18 +12,17 @@ public class QuestManager : MonoBehaviour
     public SceneTransitionManager sceneTransitionManager;
     public GameObject questBG;
     public MonsterDataBase monsterDB;
-
-    //敵に遭遇するテーブル：奇数なら遭遇しない、偶数なら遭遇
+    
     //ダンジョン上限数
     int[] encountTable = new int [50];
-
-    int currentStage = 0; //現在のステージ進行度
+    //現在のステージ進行度
+    int currentStage = 0;
 
     private void Start()
     {
         stageUI.UpdateUI(currentStage);
         DialogTextManager.instance.SetScenarios(new string[] { "ダンジョンについた。" });
-        //乱数をエンカウントテーブルに設定
+        //敵に遭遇する乱数を設定
         for (int i = 0; i < 50; i++)
         {
             int rnd = Random.Range(1, 11);
@@ -78,8 +77,6 @@ public class QuestManager : MonoBehaviour
             stageUI.CanTapItemButton();
         }
     }
-    /// </return>
-
 
     //街に戻るボタンを押されたら
     public void OnTapTownButtton()
@@ -114,7 +111,7 @@ public class QuestManager : MonoBehaviour
         stageUI.CanTapItemButton();
         if (currentStage < 10)
         {
-            int rnd = Random.Range(0, 4);
+            int rnd = Random.Range(0, 3);
             GameObject enemyObj = Instantiate(monsterDB.monsters[rnd].monsterPrefab);
             EnemyManager enemy = enemyObj.GetComponent<EnemyManager>();
             battleManager.SetUp(enemy);
@@ -161,8 +158,6 @@ public class QuestManager : MonoBehaviour
             EnemyManager enemy = enemyObj.GetComponent<EnemyManager>();
             battleManager.SetUp(enemy);
         }
-
-
     }
 
     //バトル終了処理

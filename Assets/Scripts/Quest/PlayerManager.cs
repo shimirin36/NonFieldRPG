@@ -16,9 +16,7 @@ public class PlayerManager : MonoBehaviour
     public int maxHP;
     public int hp;
     public int at;
-    public int currentStage;
-    public int money;
-    public int[] items;
+
 
     //çUåÇÇ∑ÇÈ
     public int Attack(EnemyManager enemy)
@@ -35,25 +33,5 @@ public class PlayerManager : MonoBehaviour
             hp = 0;
         }
         return damage;
-    }
-
-    string SAVEKEY = "player_SAVE";
-    public void save()
-    {
-        PlayerPrefs.SetString(SAVEKEY, JsonUtility.ToJson(this));
-        PlayerPrefs.Save();
-    }
-
-    public void Load()
-    {
-        string jsonPlayer = PlayerPrefs.GetString(SAVEKEY, JsonUtility.ToJson(new PlayerManager()));
-        instance = JsonUtility.FromJson<PlayerManager>(jsonPlayer);
-    }
-
-    public void DeleteSaveData()
-    {
-        PlayerPrefs.DeleteKey(SAVEKEY);
-        PlayerPrefs.Save();
-        Load();
     }
 }

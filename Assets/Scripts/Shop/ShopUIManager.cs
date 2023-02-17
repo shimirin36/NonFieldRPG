@@ -21,10 +21,12 @@ public class ShopUIManager : MonoBehaviour
         money.text = string.Format("{0}", moneyDB.moneys[0].havaMoney);
         DialogTextManager.instance.SetScenarios(new string[] { "Ç‹Ç¢Ç«Ç†ÇËÅIÅI" });
     }
+
     public void ShowShopBoard()
     {
         shopBoard.gameObject.SetActive(true);
     }
+
     public void CloseShopBoard()
     {
         shopBoard.gameObject.SetActive(false);

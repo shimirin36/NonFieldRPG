@@ -155,6 +155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: "\u30AA\u30CE\u30AA\u30E4\u30B8"
-  hp: 200
-  at: 28
+  hp: 180
+  at: 24
   hitEffect: {fileID: 4551888306793104505, guid: 535aa2577a34f434d910398b5317aa07, type: 3}

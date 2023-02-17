@@ -2094,9 +2094,6 @@ MonoBehaviour:
   maxHP: 0
   hp: 0
   at: 0
-  currentStage: 0
-  money: 0
-  items: 
 --- !u!114 &709911812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4417,12 +4414,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d0f511eb580ac4b9de672efb559583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 500
-  hp: 70
-  at: 35
-  currentStage: 0
-  money: 0
-  items: 
+  maxHP: 100
+  hp: 100
+  at: 30
 --- !u!4 &1359615450
 Transform:
   m_ObjectHideFlags: 0
