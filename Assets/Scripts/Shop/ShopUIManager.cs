@@ -7,17 +7,18 @@ public class ShopUIManager : MonoBehaviour
 {
     public Text money;
     public Canvas shopBoard;
+    public MoneyDataBase moneyDB;
 
-    public void SetupUI(PlayerManager player)
+    public void SetupUI(MoneyDataBase moneyDB)
     {
-        player.money = 200000;
-       money.text = string.Format("{0}", player.money);
-       shopBoard.gameObject.SetActive(false);
+        
+        money.text = string.Format("{0}", moneyDB.moneys[0].havaMoney);
+        shopBoard.gameObject.SetActive(false);
     }
 
-    public void UpdateUI(PlayerManager player)
+    public void UpdateUI(MoneyDataBase moneyDB)
     {
-        money.text = string.Format("{0}", player.money);
+        money.text = string.Format("{0}", moneyDB.moneys[0].havaMoney);
         DialogTextManager.instance.SetScenarios(new string[] { "Ç‹Ç¢Ç«Ç†ÇËÅIÅI" });
     }
     public void ShowShopBoard()

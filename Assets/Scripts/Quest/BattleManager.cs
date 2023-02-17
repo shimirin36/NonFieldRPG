@@ -9,6 +9,7 @@ using UnityEditor;
 public class BattleManager : MonoBehaviour
 {
     public ItemDataBase itemDB;
+    public MoneyDataBase moneyDB;
     public Text useRebirthBook;
     public Transform playerDamageEffect;
     public QuestManager questManager;
@@ -20,6 +21,8 @@ public class BattleManager : MonoBehaviour
     //攻撃可否
     public bool canAttack;
     EnemyManager enemy;
+
+    int getGold;
 
     private void Start()
     {
@@ -33,8 +36,9 @@ public class BattleManager : MonoBehaviour
         SoundManager.instance.PlayBGM("Battle");
         enemyUI.gameObject.SetActive(true);
         enemy = enemyManager;
-        enemyUI.SetupUI(enemy);
         canAttack = true;
+        enemyUI.SetupUI(enemy);
+        getGold = enemy.hp * 5;
         enemy.AddEventListenerOnTap(PlayerAttack);
     }
 
@@ -106,6 +110,11 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         DialogTextManager.instance.SetScenarios(new string[] {
             enemy.name + "を倒した！！"});
+        moneyDB.moneys[0].havaMoney += getGold;
+        DialogTextManager.instance.SetScenarios(new string[] {
+            "冒険者は" + getGold + "ゴールドをゲットした！！"});
+        stageUI.UpdateGetGoldUI(getGold);
+        SaveHaveMoneyChange(moneyDB.moneys[0]);
         enemyUI.gameObject.SetActive(false);
         Destroy(enemy.gameObject);
         SoundManager.instance.PlayBGM("Quest");
@@ -117,8 +126,10 @@ public class BattleManager : MonoBehaviour
         stageUI.CanNotTapItemButton();
         InventryContentsLost(itemDB);
         yield return new WaitForSeconds(2f);
+        moneyDB.moneys[0].havaMoney = 0;
         SoundManager.instance.PlayBGM("Quest");
-        DialogTextManager.instance.SetScenarios(new string[] {"冒険者が倒されてしまった！！\nアイテムをすべて失った！！", "街へ戻ろう！！"});
+        DialogTextManager.instance.SetScenarios(new string[] {"冒険者が倒されてしまった！！\nアイテムとゴールドをすべて失った！！", "街へ戻ろう！！"});
+        SaveHaveMoneyChange(moneyDB.moneys[0]);
         yield return new WaitForSeconds(4f);
         questManager.QuestFail();
     }
@@ -137,6 +148,11 @@ public class BattleManager : MonoBehaviour
             EditorUtility.SetDirty(itemDataBase);
             AssetDatabase.SaveAssets();
         }
+    }
+    void SaveHaveMoneyChange(Money money)
+    {
+        EditorUtility.SetDirty(money);
+        AssetDatabase.SaveAssets();
     }
 
 }

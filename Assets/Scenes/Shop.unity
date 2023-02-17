@@ -3113,7 +3113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86b9c9bc8624b44f94d8f69d35ff1b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1807922509}
+  moneyDB: {fileID: 11400000, guid: 2c754a15eedeb9b449b95c8ce75ff60f, type: 2}
   shopUI: {fileID: 1844440599}
   itemDB: {fileID: 11400000, guid: 753b65d2f6e7419449246b97cf08dc1b, type: 2}
 --- !u!4 &1225683288
@@ -5186,6 +5186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: {fileID: 1807922507}
   shopBoard: {fileID: 966908921}
+  moneyDB: {fileID: 0}
 --- !u!1001 &1866256152
 PrefabInstance:
   m_ObjectHideFlags: 0

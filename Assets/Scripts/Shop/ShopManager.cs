@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    public PlayerManager player;
+    public MoneyDataBase moneyDB;
     public ShopUIManager shopUI;
 
 
@@ -15,7 +15,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        shopUI.SetupUI(player);
+        shopUI.SetupUI(moneyDB);
         DialogTextManager.instance.SetScenarios(new string[] { "アイテムショップについた。" });
     }
 
@@ -41,12 +41,12 @@ public class ShopManager : MonoBehaviour
     //ポーション
     public void OnTapBuyPortion(int money)
     {
-        if (player.money >= money)
+        if (moneyDB.moneys[0].havaMoney >= money)
         {
-            player.money -= money;
+            moneyDB.moneys[0].havaMoney -= money;
             itemDB.items[0].count++;
             SaveInventryChange(itemDB.items[0]);
-            shopUI.UpdateUI(player);
+            shopUI.UpdateUI(moneyDB);
         }
         else
         {
@@ -57,12 +57,12 @@ public class ShopManager : MonoBehaviour
     //強ポーション
     public void OnTapBuyStrongPortion(int money)
     {
-        if (player.money >= money)
+        if (moneyDB.moneys[0].havaMoney >= money)
         {
-            player.money -= money;
+            moneyDB.moneys[0].havaMoney -= money;
             itemDB.items[1].count++;
             SaveInventryChange(itemDB.items[1]);
-            shopUI.UpdateUI(player);
+            shopUI.UpdateUI(moneyDB);
         }
         else
         {
@@ -73,12 +73,12 @@ public class ShopManager : MonoBehaviour
     //HPUP
     public void OnTapBuyHPUpRing(int money)
     {
-        if (player.money >= money)
+        if (moneyDB.moneys[0].havaMoney >= money)
         {
-            player.money -= money;
+            moneyDB.moneys[0].havaMoney -= money;
             itemDB.items[2].count++;
             SaveInventryChange(itemDB.items[2]);
-            shopUI.UpdateUI(player);
+            shopUI.UpdateUI(moneyDB);
         }
         else
         {
@@ -89,12 +89,12 @@ public class ShopManager : MonoBehaviour
     //ATUP
     public void OnTapBuyATUpBook(int money)
     {
-        if (player.money >= money)
+        if (moneyDB.moneys[0].havaMoney >= money)
         {
-            player.money -= money;
+            moneyDB.moneys[0].havaMoney -= money;
             itemDB.items[3].count++;
             SaveInventryChange(itemDB.items[3]);
-            shopUI.UpdateUI(player);
+            shopUI.UpdateUI(moneyDB);
         }
         else
         {
@@ -105,12 +105,12 @@ public class ShopManager : MonoBehaviour
     //復活
     public void OnTapBuyReBirthBook(int money)
     {
-        if (player.money >= money)
+        if (moneyDB.moneys[0].havaMoney >= money)
         {
-            player.money -= money;
+            moneyDB.moneys[0].havaMoney -= money;
             itemDB.items[4].count++;
             SaveInventryChange(itemDB.items[4]);
-            shopUI.UpdateUI(player);
+            shopUI.UpdateUI(moneyDB);
         }
         else
         {
@@ -121,12 +121,12 @@ public class ShopManager : MonoBehaviour
     //戻り玉
     public void OnTapBuyReturnToTown(int money)
     {
-        if (player.money >= money && itemDB.items[5].count == 0)
+        if (moneyDB.moneys[0].havaMoney >= money && itemDB.items[5].count == 0)
         {
-            player.money -= money;
+            moneyDB.moneys[0].havaMoney -= money;
             itemDB.items[5].count++;
             SaveInventryChange(itemDB.items[5]);
-            shopUI.UpdateUI(player);
+            shopUI.UpdateUI(moneyDB);
         }
         else if (itemDB.items[5].count == 1)
         {

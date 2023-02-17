@@ -7,12 +7,14 @@ using UnityEngine.UI;
 public class StageUIManager : MonoBehaviour
 {
     public Text stageText;
+    public Text haveMoneyText;
     public GameObject itemList;
     public GameObject stageClearImage;
     public GameObject nextButton;
     public GameObject toTownButton;
     public Button useItemButton;
     public GameObject closeItemListButton;
+    public MoneyDataBase moneyDB;
 
     private void Start()
     {
@@ -23,6 +25,11 @@ public class StageUIManager : MonoBehaviour
     public void UpdateUI(int currentStage)
     {
         stageText.text = string.Format("ステージ：{0}", currentStage + 1);
+        haveMoneyText.text = string.Format("{0}", moneyDB.moneys[0].havaMoney.ToString());
+    }
+    public void UpdateGetGoldUI(int getGold)
+    {
+        haveMoneyText.text = string.Format("{0}", moneyDB.moneys[0].havaMoney.ToString());
     }
 
     public void HideButtons()
