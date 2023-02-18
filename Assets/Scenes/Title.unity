@@ -278,7 +278,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Fifty Dangeon\n\uFF5EAbyss\uFF5E"
+  m_Text: "Fifty Dungeon\n\uFF5EAbyss\uFF5E"
 --- !u!222 &429416132
 CanvasRenderer:
   m_ObjectHideFlags: 0
