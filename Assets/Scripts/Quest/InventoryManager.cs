@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+//プレイヤーがアイテムを使用する際のインベントリ
 public class InventoryManager : MonoBehaviour
 {
     public PlayerManager player;
@@ -18,6 +17,7 @@ public class InventoryManager : MonoBehaviour
     public void SetUpCount()
     {
         string ObjName = item.name;
+        
         switch (ObjName)
         {
             case "Portion":
@@ -57,7 +57,7 @@ public class InventoryManager : MonoBehaviour
                 if (itemDB.items[0].count > 0 && player.hp < player.maxHP)
                 {
                     itemDB.items[0].count--;
-                    SaveInventryChange(itemDB.items[0]);
+                    itemDB.items[0].Save(0);
                     DialogTextManager.instance.SetScenarios(new string[] { $"ポーションを使った！\n体力を50回復！"});
                     haveCountText.text = string.Format("x{0}", itemDB.items[0].count.ToString()); //使用したアイテムを1つ減らす
                     player.hp += 50;
@@ -65,10 +65,12 @@ public class InventoryManager : MonoBehaviour
                     {
                         player.hp = player.maxHP;
                         playerUI.UpdateUI(player);
+                        player.Save();
                     }
                     else
                     {
                         playerUI.UpdateUI(player);
+                        player.Save();
                     }
                 }
                 //アイテム個数が0の時
@@ -88,18 +90,20 @@ public class InventoryManager : MonoBehaviour
                 if (itemDB.items[1].count > 0 && player.hp < player.maxHP)
                 {
                     itemDB.items[1].count--;
-                    SaveInventryChange(itemDB.items[1]);
+                    itemDB.items[1].Save(1);
                     DialogTextManager.instance.SetScenarios(new string[] { $"ハイポーションを使った！\n体力を200回復！" });
                     haveCountText.text = string.Format("x{0}", itemDB.items[1].count.ToString()); //使用したアイテムを1つ減らす
                     player.hp += 200;
                     if (player.hp > player.maxHP)
                     {
                         player.hp = player.maxHP;
+                        player.Save();
                         playerUI.UpdateUI(player);
                     }
                     else
                     {
                         playerUI.UpdateUI(player);
+                        player.Save();
                     }
                 }
                 //アイテム個数が0の時
@@ -119,10 +123,11 @@ public class InventoryManager : MonoBehaviour
                 if (itemDB.items[2].count > 0)
                 {
                     itemDB.items[2].count--;
-                    SaveInventryChange(itemDB.items[2]);
+                    itemDB.items[2].Save(2);
                     DialogTextManager.instance.SetScenarios(new string[] { $"体力増強の指輪を使った！\n最大体力が100上がった！" });
                     haveCountText.text = string.Format("x{0}", itemDB.items[2].count.ToString()); //使用したアイテムを1つ減らす
                     player.maxHP += 100;
+                    player.Save();
                     playerUI.UpdateUI(player);
                 }
                 //アイテム個数が0の時
@@ -137,10 +142,11 @@ public class InventoryManager : MonoBehaviour
                 if (itemDB.items[3].count > 0)
                 {
                     itemDB.items[3].count--;
-                    SaveInventryChange(itemDB.items[3]);
-                    DialogTextManager.instance.SetScenarios(new string[] { $"攻撃の書を使った！\n攻撃力が100上がった！" });
+                    itemDB.items[3].Save(3);
+                    DialogTextManager.instance.SetScenarios(new string[] { $"攻撃の書を使った！\n攻撃力が90上がった！" });
                     haveCountText.text = string.Format("x{0}", itemDB.items[3].count.ToString()); //使用したアイテムを1つ減らす
-                    player.at += 100;
+                    player.at += 90;
+                    player.Save();
                     playerUI.UpdateUI(player);
                 }
                 //アイテム個数が0の時
@@ -155,7 +161,7 @@ public class InventoryManager : MonoBehaviour
                 if (itemDB.items[5].count == 1)
                 {
                     itemDB.items[5].count--;
-                    SaveInventryChange(itemDB.items[5]);
+                    itemDB.items[5].Save(5);
                     DialogTextManager.instance.SetScenarios(new string[] { $"もどりだまを使った！\nスタコラサッサー！！" });
                     StartCoroutine(returnToTown());
                 }
@@ -166,13 +172,6 @@ public class InventoryManager : MonoBehaviour
                 }
                 break;
         }
-    }
-
-    //変更内容を保存する
-    void SaveInventryChange(Item itemCount)
-    {
-        EditorUtility.SetDirty(itemCount);
-        AssetDatabase.SaveAssets();
     }
 
     //街に戻る

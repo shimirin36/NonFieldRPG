@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using UnityEditor;
 
 //PlayerとEnemyの対戦管理
 public class BattleManager : MonoBehaviour
@@ -17,11 +15,12 @@ public class BattleManager : MonoBehaviour
     public EnemyUIManager enemyUI;
     public PlayerManager player;
     public StageUIManager stageUI;
+    EnemyManager enemy;
 
     //攻撃可否
     public bool canAttack;
-    EnemyManager enemy;
 
+    //獲得ゴールド
     int getGold;
 
     private void Start()
@@ -83,7 +82,7 @@ public class BattleManager : MonoBehaviour
             DialogTextManager.instance.SetScenarios(new string[] {
             "復活の呪文を使った！！\n冒険者はよみがえった！！"});
             itemDB.items[4].count--;
-            SaveInventryChange(itemDB.items[4]);
+            itemDB.items[4].Save(4);
             player.hp += 50;
             playerUI.UpdateUI(player);
             useRebirthBook.text = string.Format("x{0}", itemDB.items[4].count.ToString());
@@ -111,10 +110,10 @@ public class BattleManager : MonoBehaviour
         DialogTextManager.instance.SetScenarios(new string[] {
             enemy.name + "を倒した！！"});
         moneyDB.moneys[0].havaMoney += getGold;
+        SaveHaveMoneyChange(moneyDB);
         DialogTextManager.instance.SetScenarios(new string[] {
             "冒険者は" + getGold + "ゴールドをゲットした！！"});
         stageUI.UpdateGetGoldUI(getGold);
-        SaveHaveMoneyChange(moneyDB.moneys[0]);
         enemyUI.gameObject.SetActive(false);
         Destroy(enemy.gameObject);
         SoundManager.instance.PlayBGM("Quest");
@@ -125,19 +124,12 @@ public class BattleManager : MonoBehaviour
     {
         stageUI.CanNotTapItemButton();
         InventryContentsLost(itemDB);
+        SaveHaveMoneyChange(moneyDB);
         yield return new WaitForSeconds(2f);
-        moneyDB.moneys[0].havaMoney = 0;
         SoundManager.instance.PlayBGM("Quest");
-        DialogTextManager.instance.SetScenarios(new string[] {"冒険者が倒されてしまった！！\nアイテムとゴールドをすべて失った！！", "街へ戻ろう！！"});
-        SaveHaveMoneyChange(moneyDB.moneys[0]);
+        DialogTextManager.instance.SetScenarios(new string[] {"冒険者が倒されてしまった！！\nアイテムと所持金をすべて失った！！", "街へ戻ろう！！"});
         yield return new WaitForSeconds(4f);
         questManager.QuestFail();
-    }
-
-    void SaveInventryChange(Item itemCount)
-    {
-        EditorUtility.SetDirty(itemCount);
-        AssetDatabase.SaveAssets();
     }
 
     void InventryContentsLost(ItemDataBase itemDataBase)
@@ -145,14 +137,13 @@ public class BattleManager : MonoBehaviour
         for(int i = 0; i < itemDataBase.items.Count; i++)
         {
             itemDataBase.items[i].count = 0;
-            EditorUtility.SetDirty(itemDataBase);
-            AssetDatabase.SaveAssets();
+            itemDataBase.items[i].Save(i);
         }
     }
-    void SaveHaveMoneyChange(Money money)
+    void SaveHaveMoneyChange(MoneyDataBase money)
     {
-        EditorUtility.SetDirty(money);
-        AssetDatabase.SaveAssets();
+        moneyDB.moneys[0].havaMoney = 0;
+        money.moneys[0].Save();
     }
 
 }

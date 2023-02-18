@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -10,7 +8,7 @@ public class FadeIOManager : MonoBehaviour
     public static FadeIOManager instance;
 
     //フェード時間
-    public float fadeTime = 1f;
+    public float fadeTime = 2f;
 
     private void Awake()
     {

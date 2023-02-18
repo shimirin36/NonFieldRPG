@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +23,7 @@ public class StageUIManager : MonoBehaviour
     public void UpdateUI(int currentStage)
     {
         stageText.text = string.Format("ステージ：{0}", currentStage + 1);
+        moneyDB.moneys[0].Load();
         haveMoneyText.text = string.Format("{0}", moneyDB.moneys[0].havaMoney.ToString());
     }
     public void UpdateGetGoldUI(int getGold)

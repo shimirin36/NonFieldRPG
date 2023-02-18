@@ -18,4 +18,27 @@ public class Money : ScriptableObject
         set { havaMoney = value; }
 
     }
+    /*
+    public void Calculate(int money)
+    {
+        this.havaMoney -= money;
+    }
+    */
+    public void Save()
+    {
+        var data = JsonUtility.ToJson(this, true);
+
+        Debug.Log(data);
+
+        PlayerPrefs.SetString("PlayerMoney", data);
+    }
+
+    public void Load()
+    {
+        var data = PlayerPrefs.GetString("PlayerMoney");
+
+        Debug.Log(data);
+
+        JsonUtility.FromJsonOverwrite(data, this);
+    }
 }
