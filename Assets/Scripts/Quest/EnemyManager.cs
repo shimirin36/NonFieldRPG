@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DG.Tweening;
 
 //敵を管理するもの（ステータス/クリック検出）
 public class EnemyManager : MonoBehaviour
@@ -12,31 +13,36 @@ public class EnemyManager : MonoBehaviour
     public new string name;
     public int hp;
     public int at;
+    public GameObject hitEffect;
 
     //攻撃する
-    public void Attack(PlayerManager player)
+    public int Attack(PlayerManager player)
     {
-        player.Damage(at);
+        int damage = player.Damage(at);
+        return damage;
     }
+
     //ダメージを受ける
-    public void Damage(int damage)
+    public int Damage(int damage)
     {
+        Instantiate(hitEffect, this.transform, false);
+        transform.DOShakePosition(0.3f, 0.5f, 20, 30, false, true);
         hp -= damage;
         if (hp <= 0)
         {
             hp = 0;
         }
+        return damage;
     }
 
-    //tapActionに関数を登録する関数を作る
     public void AddEventListenerOnTap(Action action)
     {
-        tapAction += action;
+        tapAction += action;　//PlayerAttackの関数を登録させる
     }
 
     public void OnTap()
     {
-        tapAction();
+        tapAction();　//PlayerAttackの関数を実行させる
     }
 
 }

@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
     }
 
     public AudioSource audioSourceBGM; //BGMのスピーカー
-    public AudioClip[] audioClipsBGM; //BGMの素材（0:Title, 1:Town, 2:Quest, 3:Battle）
+    public AudioClip[] audioClipsBGM; //BGMの素材（0:Title, 1:Town, 2:Quest, 3:Battle, 4:Item）
 
     public AudioSource audioSourceSE; //SEのスピーカー
     public AudioClip[] audioClipsSE; //ならす素材
@@ -49,6 +49,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case "Battle":
                 audioSourceBGM.clip = audioClipsBGM[3];
+                break;
+            case "Shop":
+                audioSourceBGM.clip = audioClipsBGM[4];
                 break;
         }
         audioSourceBGM.Play();
