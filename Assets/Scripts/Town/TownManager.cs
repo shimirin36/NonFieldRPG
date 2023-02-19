@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //Townでの設定
@@ -16,6 +14,11 @@ public class TownManager : MonoBehaviour
     }
     //タイトルボタンが押されたら
     public void OnTapTitleButton()
+    {
+        SoundManager.instance.PlaySE(0);
+    }
+    //ショップボタンが押されたら
+    public void OnTapShopButton()
     {
         SoundManager.instance.PlaySE(0);
     }

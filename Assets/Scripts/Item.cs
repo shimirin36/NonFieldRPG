@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable]
 [CreateAssetMenu(fileName = "Item", menuName = "CreateItem")]
@@ -17,8 +16,8 @@ public class Item : ScriptableObject
     }
 
     [SerializeField] public int count; // ŒÂ”
-    [SerializeField] public string infomation; // î•ñ
-    [SerializeField] public Sprite sprite; // ‰æ‘œ
+    public string infomation; // î•ñ
+    public Sprite sprite; // ‰æ‘œ
 
     public Item(Item item)
     {
@@ -41,5 +40,23 @@ public class Item : ScriptableObject
     {
         get { return sprite; }
         set { sprite = value; }
+    }
+
+    public void Save(int itemNum)
+    {
+        var data = JsonUtility.ToJson(this, true);
+
+        Debug.Log(data);
+
+        PlayerPrefs.SetString($"PlayerItem{itemNum}", data);
+    }
+
+    public void Load(int itemNum)
+    {
+        var data = PlayerPrefs.GetString($"PlayerItem{itemNum}");
+
+        Debug.Log(data);
+
+        JsonUtility.FromJsonOverwrite(data, this);
     }
 }

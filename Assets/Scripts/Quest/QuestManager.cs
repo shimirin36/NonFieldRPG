@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -7,11 +6,13 @@ using DG.Tweening;
 public class QuestManager : MonoBehaviour
 {
     public StageUIManager stageUI;
+    public PlayerManager player;
     public GameObject enemyPrefab;
     public BattleManager battleManager;
     public SceneTransitionManager sceneTransitionManager;
     public GameObject questBG;
     public MonsterDataBase monsterDB;
+    public ItemDataBase itemDB;
     
     //ダンジョン上限数
     int[] encountTable = new int [50];
@@ -21,6 +22,11 @@ public class QuestManager : MonoBehaviour
     private void Start()
     {
         stageUI.UpdateUI(currentStage);
+        player.Load();
+        for (int i = 0; i < itemDB.items.Count; i++)
+        {
+            itemDB.items[i].Load(i);
+        }
         DialogTextManager.instance.SetScenarios(new string[] { "ダンジョンについた。" });
         //敵に遭遇する乱数を設定
         for (int i = 0; i < 50; i++)
@@ -81,6 +87,7 @@ public class QuestManager : MonoBehaviour
     //街に戻るボタンを押されたら
     public void OnTapTownButtton()
     {
+        
         SoundManager.instance.PlaySE(0);
     }
 
@@ -174,7 +181,7 @@ public class QuestManager : MonoBehaviour
 
     void QuestClear()
     {
-        DialogTextManager.instance.SetScenarios(new string[] { "宝箱を手に入れた！！", "街に戻ろう。" });
+        DialogTextManager.instance.SetScenarios(new string[] { "おめでとうございます！！\nここまで遊んでくれてありがとう！！"});
         //クエストクリア音を鳴らす
         SoundManager.instance.StopBGM();
         SoundManager.instance.PlaySE(2);

@@ -8,13 +8,19 @@ public class ShopUIManager : MonoBehaviour
     public Text money;
     public Canvas shopBoard;
     public MoneyDataBase moneyDB;
-
+    
     public void SetupUI(MoneyDataBase moneyDB)
     {
-        
         money.text = string.Format("{0}", moneyDB.moneys[0].havaMoney);
         shopBoard.gameObject.SetActive(false);
     }
+    /*
+    public void SetupUI(PlayerManager player)
+    {
+        money.text = string.Format("{0}", 10000);
+        shopBoard.gameObject.SetActive(false);
+    }
+    */
 
     public void UpdateUI(MoneyDataBase moneyDB)
     {

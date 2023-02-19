@@ -1,21 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    public MoneyDataBase moneyDB;
     public ShopUIManager shopUI;
-
+    public PlayerManager player;
 
     [SerializeField] 
     public ItemDataBase itemDB;
+    [SerializeField]
+    public MoneyDataBase moneyDB;
 
     private void Start()
     {
+        for (int i = 0; i < moneyDB.moneys.Count; i++)
+        {
+            itemDB.items[i].Load(i);
+        }
+        moneyDB.moneys[0].Load();
         shopUI.SetupUI(moneyDB);
+        //shopUI.SetupUI(player);
         DialogTextManager.instance.SetScenarios(new string[] { "アイテムショップについた。" });
     }
 
@@ -44,9 +47,10 @@ public class ShopManager : MonoBehaviour
         if (moneyDB.moneys[0].havaMoney >= money)
         {
             moneyDB.moneys[0].havaMoney -= money;
-            itemDB.items[0].count++;
-            SaveInventryChange(itemDB.items[0]);
+            moneyDB.moneys[0].Save();
             shopUI.UpdateUI(moneyDB);
+            itemDB.items[0].count++;
+            itemDB.items[0].Save(0);
         }
         else
         {
@@ -60,9 +64,10 @@ public class ShopManager : MonoBehaviour
         if (moneyDB.moneys[0].havaMoney >= money)
         {
             moneyDB.moneys[0].havaMoney -= money;
-            itemDB.items[1].count++;
-            SaveInventryChange(itemDB.items[1]);
+            moneyDB.moneys[0].Save();
             shopUI.UpdateUI(moneyDB);
+            itemDB.items[1].count++;
+            itemDB.items[1].Save(1);
         }
         else
         {
@@ -76,9 +81,10 @@ public class ShopManager : MonoBehaviour
         if (moneyDB.moneys[0].havaMoney >= money)
         {
             moneyDB.moneys[0].havaMoney -= money;
-            itemDB.items[2].count++;
-            SaveInventryChange(itemDB.items[2]);
+            moneyDB.moneys[0].Save();
             shopUI.UpdateUI(moneyDB);
+            itemDB.items[2].count++;
+            itemDB.items[2].Save(2);
         }
         else
         {
@@ -92,9 +98,10 @@ public class ShopManager : MonoBehaviour
         if (moneyDB.moneys[0].havaMoney >= money)
         {
             moneyDB.moneys[0].havaMoney -= money;
-            itemDB.items[3].count++;
-            SaveInventryChange(itemDB.items[3]);
+            moneyDB.moneys[0].Save();
             shopUI.UpdateUI(moneyDB);
+            itemDB.items[3].count++;
+            itemDB.items[3].Save(3);
         }
         else
         {
@@ -108,9 +115,10 @@ public class ShopManager : MonoBehaviour
         if (moneyDB.moneys[0].havaMoney >= money)
         {
             moneyDB.moneys[0].havaMoney -= money;
-            itemDB.items[4].count++;
-            SaveInventryChange(itemDB.items[4]);
+            moneyDB.moneys[0].Save();
             shopUI.UpdateUI(moneyDB);
+            itemDB.items[4].count++;
+            itemDB.items[4].Save(4);
         }
         else
         {
@@ -124,9 +132,10 @@ public class ShopManager : MonoBehaviour
         if (moneyDB.moneys[0].havaMoney >= money && itemDB.items[5].count == 0)
         {
             moneyDB.moneys[0].havaMoney -= money;
-            itemDB.items[5].count++;
-            SaveInventryChange(itemDB.items[5]);
+            moneyDB.moneys[0].Save();
             shopUI.UpdateUI(moneyDB);
+            itemDB.items[5].count++;
+            itemDB.items[5].Save(5);
         }
         else if (itemDB.items[5].count == 1)
         {
@@ -137,15 +146,10 @@ public class ShopManager : MonoBehaviour
             NoMoney();
         }
     }
+
     //お金が足りない場合の処理
     void NoMoney()
     {
         DialogTextManager.instance.SetScenarios(new string[] { "お金が足りない！！" });
-    }
-
-    void SaveInventryChange(Item itemCount)
-    {
-        EditorUtility.SetDirty(itemCount);
-        AssetDatabase.SaveAssets();
     }
 }
