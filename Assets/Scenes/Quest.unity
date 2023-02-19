@@ -2742,11 +2742,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageUI: {fileID: 851219451}
+  player: {fileID: 1359615449}
   enemyPrefab: {fileID: 5458849390292410203, guid: df156c76da5d88a40ae160a0780c9101, type: 3}
   battleManager: {fileID: 1600172462}
   sceneTransitionManager: {fileID: 87984559}
   questBG: {fileID: 2114335692}
   monsterDB: {fileID: 11400000, guid: 614225a9615ca004997fb5ec45af25b0, type: 2}
+  itemDB: {fileID: 11400000, guid: 753b65d2f6e7419449246b97cf08dc1b, type: 2}
 --- !u!4 &794778805
 Transform:
   m_ObjectHideFlags: 0

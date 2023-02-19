@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[Serializable]
 public class PlayerManager : MonoBehaviour
 {
     static PlayerManager instance = null;
+    
     public static PlayerManager GetInstance()
     {
         if(instance == null)
@@ -13,10 +14,9 @@ public class PlayerManager : MonoBehaviour
         }
         return instance;
     }
-    public int maxHP;
-    public int hp;
-    public int at;
-
+    [SerializeField]public int maxHP;
+    [SerializeField]public int hp;
+    [SerializeField]public int at;
 
     //çUåÇÇ∑ÇÈ
     public int Attack(EnemyManager enemy)
@@ -33,5 +33,20 @@ public class PlayerManager : MonoBehaviour
             hp = 0;
         }
         return damage;
+    }
+    public void Save()
+    {
+        var data = JsonUtility.ToJson(this, true);
+
+        PlayerPrefs.SetString("PlayerStatus", data);
+    }
+
+    public void Load()
+    {
+        var data = PlayerPrefs.GetString("PlayerStatus");
+
+        JsonUtility.FromJsonOverwrite(data, this);
+
+        hp = maxHP;
     }
 }
