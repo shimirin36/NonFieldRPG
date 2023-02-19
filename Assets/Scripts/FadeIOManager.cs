@@ -1,5 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
+using System.Collections.Generic;
 
 //フェードインアウト演出の設定
 public class FadeIOManager : MonoBehaviour
