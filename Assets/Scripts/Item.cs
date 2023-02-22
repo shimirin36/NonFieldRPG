@@ -46,16 +46,12 @@ public class Item : ScriptableObject
     {
         var data = JsonUtility.ToJson(this, true);
 
-        Debug.Log(data);
-
         PlayerPrefs.SetString($"PlayerItem{itemNum}", data);
     }
 
     public void Load(int itemNum)
     {
         var data = PlayerPrefs.GetString($"PlayerItem{itemNum}");
-
-        Debug.Log(data);
 
         JsonUtility.FromJsonOverwrite(data, this);
     }

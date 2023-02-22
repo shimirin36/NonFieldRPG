@@ -110,7 +110,7 @@ public class BattleManager : MonoBehaviour
         DialogTextManager.instance.SetScenarios(new string[] {
             enemy.name + "を倒した！！"});
         moneyDB.moneys[0].havaMoney += getGold;
-        SaveHaveMoneyChange(moneyDB);
+        moneyDB.moneys[0].Save();
         DialogTextManager.instance.SetScenarios(new string[] {
             "冒険者は" + getGold + "ゴールドをゲットした！！"});
         stageUI.UpdateGetGoldUI(getGold);
@@ -124,7 +124,7 @@ public class BattleManager : MonoBehaviour
     {
         stageUI.CanNotTapItemButton();
         InventryContentsLost(itemDB);
-        SaveHaveMoneyChange(moneyDB);
+        MoneyLost(moneyDB);
         yield return new WaitForSeconds(2f);
         SoundManager.instance.PlayBGM("Quest");
         DialogTextManager.instance.SetScenarios(new string[] {"冒険者が倒されてしまった！！\nアイテムと所持金をすべて失った！！", "街へ戻ろう！！"});
@@ -140,7 +140,7 @@ public class BattleManager : MonoBehaviour
             itemDataBase.items[i].Save(i);
         }
     }
-    void SaveHaveMoneyChange(MoneyDataBase money)
+    void MoneyLost(MoneyDataBase money)
     {
         moneyDB.moneys[0].havaMoney = 0;
         money.moneys[0].Save();
