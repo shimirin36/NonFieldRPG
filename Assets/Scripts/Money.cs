@@ -30,6 +30,6 @@ public class Money : ScriptableObject
     {
         var data = PlayerPrefs.GetString("PlayerMoney");
 
-        JsonUtility.FromJsonOverwrite(data, this);
+        JsonUtility.FromJsonOverwrite(data, havaMoney);
     }
 }
